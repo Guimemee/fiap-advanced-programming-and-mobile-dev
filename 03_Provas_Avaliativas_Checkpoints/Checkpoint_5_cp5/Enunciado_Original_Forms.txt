@@ -1,0 +1,7 @@
+FIAP • Engenharia da Computação
+Disciplina: Advanced Programming & Mobile Development
+Turma 3ECR • Ano 2024
+Checkpoint 05: Desenvolvimento Multiplataforma com Flutter e Gerenciamento de Estado BloC
+
+ENUNCIADO ORIGINAL:
+Construir módulo multiplataforma em Flutter utilizando o padrão BloC (Business Logic Component) para compartilhamento de código de telemetria entre Android e iOS.

@@ -1,0 +1,7 @@
+FIAP • Engenharia da Computação
+Disciplina: Advanced Programming & Mobile Development
+Turma 3ECR • Ano 2024
+Checkpoint 06: Integração Contínua (CI/CD) Mobile e Testes Automatizados E2E
+
+ENUNCIADO ORIGINAL:
+Configurar pipeline no GitHub Actions para execução de testes unitários, testes de interface instrumentados com Espresso e compilação automatizada de APK/AAB assinados.

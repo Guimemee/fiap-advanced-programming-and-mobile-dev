@@ -1,0 +1,7 @@
+FIAP • Engenharia da Computação
+Disciplina: Advanced Programming & Mobile Development
+Turma 3ECR • Ano 2024
+Checkpoint 01: Arquitetura MVVM, StateFlow e Ciclo de Vida Reativo no Android
+
+ENUNCIADO ORIGINAL:
+Implementar a camada de apresentação de aplicativo Android moderno utilizando ViewModel, StateFlow e Jetpack Compose com gerenciamento formal de eventos de tela e rotação.

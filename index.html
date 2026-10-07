@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FIAP • Advanced Programming & Mobile Development | Turma 3ECR • 2024</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+
+  <style>
+    :root {
+      --bg-dark: #0a0614;
+      --bg-card: #130d24;
+      --bg-surface: #20163b;
+      --border: #34245c;
+      --text-main: #f3f4f6;
+      --text-muted: #94a3b8;
+      --primary: #8b5cf6;
+      --secondary: #06b6d4;
+      --accent: #a855f7;
+      --radius: 12px;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'Fira Code', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      padding-top: 80px;
+    }
+
+    [id] { scroll-margin-top: 95px; }
+
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(10, 14, 23, 0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      z-index: 1000;
+      padding: 10px 24px;
+    }
+
+    .header-container {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .header-row-1 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: -0.2px;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .header-row-1 .brand-fiap {
+      color: var(--primary);
+      font-weight: 900;
+      letter-spacing: 0.5px;
+    }
+
+    .header-row-2 {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .turma-tag {
+      font-size: 0.82rem;
+      line-height: 1.3;
+      font-weight: 700;
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.12);
+      padding: 3px 10px;
+      border-radius: 6px;
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .btn-repo-top {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      line-height: 1.3;
+      font-weight: 700;
+      color: #ffffff;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      padding: 5px 12px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+
+    .btn-repo-top:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(56, 189, 248, 0.4);
+      filter: brightness(1.1);
+    }
+
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .hero-banner {
+      margin-bottom: 32px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+
+    .hero-banner img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin-bottom: 36px;
+    }
+
+    .metric-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .metric-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 4px; height: 100%;
+      background: var(--primary);
+    }
+
+    .metric-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+
+    .metric-val {
+      font-family: var(--font-mono);
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 4px;
+    }
+
+    .metric-sub {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .nav-tabs {
+      display: flex;
+      gap: 8px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 32px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+    }
+
+    .nav-tab {
+      padding: 10px 18px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .nav-tab:hover, .nav-tab.active {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    .cp-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+      margin-bottom: 40px;
+    }
+
+    .section-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--primary);
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid var(--primary);
+      padding: 4px 10px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+      letter-spacing: 0.5px;
+    }
+
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 24px;
+      line-height: 1.3;
+    }
+
+    .problem-box, .plot-box {
+      background: var(--bg-dark);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 24px;
+      overflow: hidden;
+    }
+
+    .box-header {
+      background: var(--bg-surface);
+      padding: 10px 16px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #ffffff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .copy-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--accent);
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .copy-btn:hover {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    .box-content {
+      padding: 16px;
+      font-size: 0.95rem;
+      color: #cbd5e1;
+    }
+
+    .formula-box {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.05), rgba(129, 140, 248, 0.05));
+      border: 1px solid var(--primary);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .formula-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+
+    .formula-latex {
+      font-size: 1.25rem;
+      color: #ffffff;
+      overflow-x: auto;
+      padding: 6px 0;
+    }
+
+    .symbolab-container {
+      margin-bottom: 24px;
+    }
+
+    .symbolab-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 14px;
+    }
+
+    .step-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+
+    .step-header {
+      margin-bottom: 8px;
+    }
+
+    .step-tag {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .step-content {
+      font-size: 0.95rem;
+      color: #e2e8f0;
+    }
+
+    .plot-img-container {
+      padding: 16px;
+      background: var(--bg-dark);
+      text-align: center;
+    }
+
+    .plot-img-container img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 24px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-top: 60px;
+    }
+
+    footer a { color: var(--primary); text-decoration: none; font-weight: 600; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-container">
+      <div class="header-row-1">
+        <span class="brand-fiap">FIAP</span>
+        <span class="brand-sep">•</span>
+        <span>Engenharia da Computação</span>
+      </div>
+      <div class="header-row-2">
+        <span class="turma-tag">TURMA 3ECR • 2024</span>
+        <a href="https://github.com/Guimemee/fiap-advanced-programming-and-mobile-dev" class="btn-repo-top" target="_blank" rel="noopener">Ver Repositório ↗</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="hero-banner">
+      <img src="card_technologies.svg" alt="FIAP Advanced Programming & Mobile Development Banner" />
+    </div>
+
+    <div class="metrics-grid">
+      
+        <div class="metric-card">
+          <div class="metric-label">ARQUITETURA</div>
+          <div class="metric-val">CLEAN & MVVM</div>
+          <div class="metric-sub">Separação Estrita de Responsabilidades</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">INTERFACE MODERNA</div>
+          <div class="metric-val">COMPOSE / FLUTTER</div>
+          <div class="metric-sub">UI Declarativa Reativa a Estados</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">CLIENTE HTTP</div>
+          <div class="metric-val">RETROFIT / DIO</div>
+          <div class="metric-sub">Serialização JSON com Coroutines</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">COBERTURA TESTES</div>
+          <div class="metric-val">88.5%</div>
+          <div class="metric-sub">Testes Unitários de ViewModel e UseCases</div>
+        </div>
+    </div>
+
+    <nav class="nav-tabs">
+      <a href="#cp1" class="nav-tab active">CP 1: Arquitetura MVVM, StateFl...</a>
+      <a href="#cp2" class="nav-tab">CP 2: Clean Architecture: Camad...</a>
+      <a href="#cp3" class="nav-tab">CP 3: Comunicação em Rede Assín...</a>
+      <a href="#cp4" class="nav-tab">CP 4: Persistência Local Offlin...</a>
+      <a href="#cp5" class="nav-tab">CP 5: Desenvolvimento Multiplat...</a>
+      <a href="#cp6" class="nav-tab">CP 6: Integração Contínua (CI/C...</a>
+    </nav>
+
+    
+      <section id="cp1" class="cp-section">
+        <div class="section-badge">CHECKPOINT 01 • 3ECR 2024</div>
+        <h2 class="section-title">Arquitetura MVVM, StateFlow e Ciclo de Vida Reativo no Android</h2>
+        
+        <div class="problem-box">
+          <div class="box-header">
+            <span>📋 ENUNCIADO ORIGINAL DA AVALIAÇÃO</span>
+            <button class="copy-btn" onclick="copyText('prob-cp1')">Copiar Enunciado</button>
+          </div>
+          <div id="prob-cp1" class="box-content">
+            <p>Implementar a camada de apresentação de aplicativo Android moderno utilizando ViewModel, StateFlow e Jetpack Compose com gerenciamento formal de eventos de tela e rotação.</p>
+          </div>
+        </div>
+
+        <div class="formula-box">
+          <div class="formula-title">📐 MODELAGEM MATEMÁTICA &amp; FORMULAÇÃO FORMAL</div>
+          <div class="formula-latex">$$\text{UI State} = f(\text{ViewModel State}), \quad \text{StateFlow}\langle \text{ScreenUiState} \rangle$$</div>
+        </div>
+
+        <div class="symbolab-container">
+          <h3 class="symbolab-title">💎 Resolução Algébrica Passo a Passo (Padrão Symbolab)</h3>
+          
+            <div class="step-card">
+              <div class="step-header">
+                <span class="step-tag">Passo 1: Modelagem do Estado de UI Selado (Sealed Interface)</span>
+              </div>
+              <div class="step-content">
+                <p>Definir estados Loading, Success(data) e Error(message).</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-header">
+                <span class="step-tag">Passo 2: Gerenciamento de Estado no ViewModel</span>
+              </div>
+              <div class="step-content">
+                <p>Exposição de _uiState como MutableStateFlow privado e uiState como StateFlow imutável.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-header">
+                <span class="step-tag">Passo 3: Consumo Reativo no Composable</span>
+              </div>
+              <div class="step-content">
+                <p>Uso de collectAsStateWithLifecycle() para pausar emissões quando o app está em segundo plano.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-header">
+                <span class="step-tag">Passo 4: Sobrevivência à Destruição de Configuração</span>
+              </div>
+              <div class="step-content">
+                <p>Retenção dos dados do ViewModel durante rotações de tela sem recarregamento de rede.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-header">
+                <span class="step-tag">Passo 5: Conclusão de Arquitetura</span>
+              </div>
+              <div class="step-content">
+                <p>Interface fluida com recomposição granular apenas nos nós alterados da árvore Compose.</p>
+              </div>
+            </div>
+        </div>
+
+        <div class="plot-box">
+          <div class="box-header">
+            <span>📊 GRÁFICO COMPUTACIONAL &amp; VISUALIZAÇÃO DE RESULTADOS</span>
+            <span class="plot-tag">Matplotlib • Alta Resolução</span>
+          </div>
+          <div class="plot-img-container">
+            <img src="03_Provas_Avaliativas_Checkpoints/Checkpoint_1_cp1/grafico_resolucao.png" alt="Gráfico Arquitetura MVVM, StateFlow e Ciclo de Vida Reativo no Android" loading="lazy" />
+          </div>
+        </div>
+      </section>
+      <section id="cp2" class="cp-section">
+        <div class="section-badge">CHECKPOINT 02 • 3ECR 2024</div>
+        <h2 class="section-title">Clean Architecture: Camadas Domain, Data e Presentation</h2>
+        
+        <div class="problem-box">
+          <div class="box-header">
+            <span>📋 ENUNCIADO ORIGINAL DA AVALIAÇÃO</span>
+            <button class="copy-btn" onclick="copyText('prob-cp2')">Copiar Enunciado</button>
+          </div>
+          <div id="prob-cp2" class="box-content">
+            <p>Estruturar o projeto mobile em módulos desacoplados seguindo a Clean Architecture de Robert Martin, aplicando o padrão Repository e injeção de dependência com Hilt.</p>
+          </div>
+        </div>
+
+        <div class="formula-box">
+          <div class="formula-title">📐 MODELAGEM MATEMÁTICA &amp; FORMULAÇÃO FORMAL</div>
+          <div class="formula-latex">$$\text{Presentation} \to \text{Domain (UseCases)} \leftarrow \text{Data (Repository Impl)}$$</div>
+        </div>
+
+        <div class="symbolab-container">
+          <h3 class="symbolab-title">💎 Resolução Algébrica Passo a Passo (Padrão Symbolab)</h3>
+          
+            <div class="step-card">
+              <div class="step-header">
+                <span class="step-tag">Passo 1: Camada de Domínio Pura (Domain Layer)</span>
+              </div>
+              <div class="step-content">
+                <p>Entidades puras de negócio e Use Cases sem qualquer dependência do framework Android.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-header">
+                <span class="step-tag">Passo 2: Inversão de Controle com Interfaces de Repositório</span>
+              </div>
+              <div class="step-content">
+                <p>A camada Domain define a interface; a camada Data implementa o repositório concreto.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-header">
+                <span class="step-tag">Passo 3: Mapeamento de Modelos (DTO para Entidade)</span>
+              </div>
+              <div class="step-content">
+                <p>Mappers isolando contratos de rede externos da lógica central de negócio.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-header">
+                <span class="step-tag">Passo 4: Injeção de Dependências com Hilt / Koin</span>
+              </div>
+              <div class="step-content">
+                <p>Provisão centralizada de instâncias Singleton de clientes HTTP e bancos locais.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-header">
+                <span class="step-tag">Passo 5: Conclusão Estrutural</span>
+              </div>
+              <div class="step-content">
+                <p>100% dos Use Cases testáveis com testes unitários JUnit puros executados em microssegundos.</p>
+              </div>
+            </div>
+        </div>
+
+        <div class="plot-box">
+          <div class="box-header">
+            <span>📊 GRÁFICO COMPUTACIONAL &amp; VISUALIZAÇÃO DE RESULTADOS</span>
+            <span class="plot-tag">Matplotlib • Alta Resolução</span>
+          </div>
+          <div class="plot-img-container">
+            <img src="03_Provas_Avaliativas_Checkpoints/Checkpoint_2_cp2/grafico_resolucao.png" alt="Gráfico Clean Architecture: Camadas Domain, Data e Presentation" loading="lazy" />
+          </div>
+        </div>
+      </section>
+      <section id="cp3" class="cp-section">
+        <div class="section-badge">CHECKPOINT 03 • 3ECR 2024</div>
+        <h2 class="section-title">Comunicação em Rede Assíncrona com Retrofit, OkHttp e Coroutines</h2>
+        
+        <div class="problem-box">
+          <div class="box-header">
+            <span>📋 ENUNCIADO ORIGINAL DA AVALIAÇÃO</span>
+            <button class="copy-btn" onclick="copyText('prob-cp3')">Copiar Enunciado</button>
+          </div>
+          <div id="prob-cp3" class="box-content">
+            <p>Implementar cliente HTTP com Retrofit e interceptores OkHttp para autenticação via tokens JWT, refresh token automático e tratamento de exceções de conexão.</p>
+          </div>
+        </div>
+
+        <div class="formula-box">
+          <div class="formula-title">📐 MODELAGEM MATEMÁTICA &amp; FORMULAÇÃO FORMAL</div>
+          <div class="formula-latex">$$\text{suspend fun fetchTelemetry}(): \text{Response}\langle \text{TelemetryDto} \rangle$$</div>
+        </div>
+
+        <div class="symbolab-container">
+          <h3 class="symbolab-title">💎 Resolução Algébrica Passo a Passo (Padrão Symbolab)</h3>
+          
+            <div class="step-card">
+              <div class="step-header">
+                <span class="step-tag">Passo 1: Interface de Serviço Retrofit</span>
+              </div>
+              <div class="step-content">
+                <p>Definição de endpoints com anotações @GET, @POST e suspensão nativa com Coroutines.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-header">
+                <span class="step-tag">Passo 2: Interceptor de Autenticação OkHttp</span>
+              </div>
+              <div class="step-content">
+                <p>AuthInterceptor injetando header 'Authorization: Bearer <token>' automaticamente.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-header">
+                <span class="step-tag">Passo 3: Mecanismo de Renovação de Sessão (Authenticator)</span>
+              </div>
+              <div class="step-content">
+                <p>Ao receber HTTP 401, dispara refresh token síncrono e repete a requisição original.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-header">
+                <span class="step-tag">Passo 4: Conversão de Erros de Rede em Resultados de Domínio</span>
+              </div>
+              <div class="step-content">
+                <p>Empacotamento em monad Result.success() ou Result.failure() tipado.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-header">
+                <span class="step-tag">Passo 5: Conclusão de Resiliência</span>
+              </div>
+              <div class="step-content">
+                <p>Retentativas exponenciais automáticas garantindo entrega sob redes móveis instáveis.</p>
+              </div>
+            </div>
+        </div>
+
+        <div class="plot-box">
+          <div class="box-header">
+            <span>📊 GRÁFICO COMPUTACIONAL &amp; VISUALIZAÇÃO DE RESULTADOS</span>
+            <span class="plot-tag">Matplotlib • Alta Resolução</span>
+          </div>
+          <div class="plot-img-container">
+            <img src="03_Provas_Avaliativas_Checkpoints/Checkpoint_3_cp3/grafico_resolucao.png" alt="Gráfico Comunicação em Rede Assíncrona com Retrofit, OkHttp e Coroutines" loading="lazy" />
+          </div>
+        </div>
+      </section>
+      <section id="cp4" class="cp-section">
+        <div class="section-badge">CHECKPOINT 04 • 3ECR 2024</div>
+        <h2 class="section-title">Persistência Local Offline-First com Room Database e SQLCipher</h2>
+        
+        <div class="problem-box">
+          <div class="box-header">
+            <span>📋 ENUNCIADO ORIGINAL DA AVALIAÇÃO</span>
+            <button class="copy-btn" onclick="copyText('prob-cp4')">Copiar Enunciado</button>
+          </div>
+          <div id="prob-cp4" class="box-content">
+            <p>Desenvolver arquitetura offline-first onde a interface consome exclusivamente o banco Room criptografado local, sincronizado em segundo plano com a API remota via WorkManager.</p>
+          </div>
+        </div>
+
+        <div class="formula-box">
+          <div class="formula-title">📐 MODELAGEM MATEMÁTICA &amp; FORMULAÇÃO FORMAL</div>
+          <div class="formula-latex">$$@Database(\text{entities} = [\dots], \text{version} = 1), \quad \text{Single Source of Truth (SSOT)}$$</div>
+        </div>
+
+        <div class="symbolab-container">
+          <h3 class="symbolab-title">💎 Resolução Algébrica Passo a Passo (Padrão Symbolab)</h3>
+          
+            <div class="step-card">
+              <div class="step-header">
+                <span class="step-tag">Passo 1: Definição de Entidades e DAOs do Room</span>
+              </div>
+              <div class="step-content">
+                <p>Data Access Object expondo Flow<List<Entity>> para emissão contínua de mudanças.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-header">
+                <span class="step-tag">Passo 2: Criptografia de Banco com SQLCipher</span>
+              </div>
+              <div class="step-content">
+                <p>Chave mestra AES-256 derivada no Android KeyStore para proteção de dados em repouso.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-header">
+                <span class="step-tag">Passo 3: Repositório como Fonte Única da Verdade</span>
+              </div>
+              <div class="step-content">
+                <p>A UI observa apenas o Room; o WorkManager consulta a API remota e persiste localmente.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-header">
+                <span class="step-tag">Passo 4: Sincronização em Segundo Plano (WorkManager)</span>
+              </div>
+              <div class="step-content">
+                <p>Tarefas agendadas com restrições de bateria não-crítica e conexão Wi-Fi ativa.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-header">
+                <span class="step-tag">Passo 5: Conclusão Offline</span>
+              </div>
+              <div class="step-content">
+                <p>O aplicativo opera com funcionalidade integral em alto-mar sem sinal celular durante o Desafio Sanofi.</p>
+              </div>
+            </div>
+        </div>
+
+        <div class="plot-box">
+          <div class="box-header">
+            <span>📊 GRÁFICO COMPUTACIONAL &amp; VISUALIZAÇÃO DE RESULTADOS</span>
+            <span class="plot-tag">Matplotlib • Alta Resolução</span>
+          </div>
+          <div class="plot-img-container">
+            <img src="03_Provas_Avaliativas_Checkpoints/Checkpoint_4_cp4/grafico_resolucao.png" alt="Gráfico Persistência Local Offline-First com Room Database e SQLCipher" loading="lazy" />
+          </div>
+        </div>
+      </section>
+      <section id="cp5" class="cp-section">
+        <div class="section-badge">CHECKPOINT 05 • 3ECR 2024</div>
+        <h2 class="section-title">Desenvolvimento Multiplataforma com Flutter e Gerenciamento de Estado BloC</h2>
+        
+        <div class="problem-box">
+          <div class="box-header">
+            <span>📋 ENUNCIADO ORIGINAL DA AVALIAÇÃO</span>
+            <button class="copy-btn" onclick="copyText('prob-cp5')">Copiar Enunciado</button>
+          </div>
+          <div id="prob-cp5" class="box-content">
+            <p>Construir módulo multiplataforma em Flutter utilizando o padrão BloC (Business Logic Component) para compartilhamento de código de telemetria entre Android e iOS.</p>
+          </div>
+        </div>
+
+        <div class="formula-box">
+          <div class="formula-title">📐 MODELAGEM MATEMÁTICA &amp; FORMULAÇÃO FORMAL</div>
+          <div class="formula-latex">$$\text{Events} \xrightarrow{\text{Bloc.mapEventToState}} \text{States}, \quad \text{StreamController}\langle \text{State} \rangle$$</div>
+        </div>
+
+        <div class="symbolab-container">
+          <h3 class="symbolab-title">💎 Resolução Algébrica Passo a Passo (Padrão Symbolab)</h3>
+          
+            <div class="step-card">
+              <div class="step-header">
+                <span class="step-tag">Passo 1: Definição dos Eventos e Estados BloC</span>
+              </div>
+              <div class="step-content">
+                <p>Separação unidirecional de fluxo de dados (UDF) com eventos discretos de entrada.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-header">
+                <span class="step-tag">Passo 2: Implementação do BloC com Dart Streams</span>
+              </div>
+              <div class="step-content">
+                <p>Uso de transformadores asyncExpand e debounceTime para controle de digitação.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-header">
+                <span class="step-tag">Passo 3: Componente BlocBuilder e BlocListener</span>
+              </div>
+              <div class="step-content">
+                <p>Renderização eficiente reativa apenas aos estados relevantes na árvore de widgets.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-header">
+                <span class="step-tag">Passo 4: Integração de MethodChannels Nativos</span>
+              </div>
+              <div class="step-content">
+                <p>Comunicação direta com sensores específicos de hardware via canais de plataforma.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-header">
+                <span class="step-tag">Passo 5: Conclusão Multiplataforma</span>
+              </div>
+              <div class="step-content">
+                <p>Base de código 95% compartilhada entre iOS e Android com desempenho gráfico nativo a 60 FPS.</p>
+              </div>
+            </div>
+        </div>
+
+        <div class="plot-box">
+          <div class="box-header">
+            <span>📊 GRÁFICO COMPUTACIONAL &amp; VISUALIZAÇÃO DE RESULTADOS</span>
+            <span class="plot-tag">Matplotlib • Alta Resolução</span>
+          </div>
+          <div class="plot-img-container">
+            <img src="03_Provas_Avaliativas_Checkpoints/Checkpoint_5_cp5/grafico_resolucao.png" alt="Gráfico Desenvolvimento Multiplataforma com Flutter e Gerenciamento de Estado BloC" loading="lazy" />
+          </div>
+        </div>
+      </section>
+      <section id="cp6" class="cp-section">
+        <div class="section-badge">CHECKPOINT 06 • 3ECR 2024</div>
+        <h2 class="section-title">Integração Contínua (CI/CD) Mobile e Testes Automatizados E2E</h2>
+        
+        <div class="problem-box">
+          <div class="box-header">
+            <span>📋 ENUNCIADO ORIGINAL DA AVALIAÇÃO</span>
+            <button class="copy-btn" onclick="copyText('prob-cp6')">Copiar Enunciado</button>
+          </div>
+          <div id="prob-cp6" class="box-content">
+            <p>Configurar pipeline no GitHub Actions para execução de testes unitários, testes de interface instrumentados com Espresso e compilação automatizada de APK/AAB assinados.</p>
+          </div>
+        </div>
+
+        <div class="formula-box">
+          <div class="formula-title">📐 MODELAGEM MATEMÁTICA &amp; FORMULAÇÃO FORMAL</div>
+          <div class="formula-latex">$$\text{Pipeline CI: Lint} \to \text{Unit Tests} \to \text{Build Release} \to \text{Sign APK} \to \text{Deploy TestFlight/PlayStore}$$</div>
+        </div>
+
+        <div class="symbolab-container">
+          <h3 class="symbolab-title">💎 Resolução Algébrica Passo a Passo (Padrão Symbolab)</h3>
+          
+            <div class="step-card">
+              <div class="step-header">
+                <span class="step-tag">Passo 1: Análise Estática de Código (ktlint e detekt)</span>
+              </div>
+              <div class="step-content">
+                <p>Bloqueio automático de Pull Requests que violem convenções de estilo e complexidade ciclomática.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-header">
+                <span class="step-tag">Passo 2: Execução de Testes Unitários de ViewModel</span>
+              </div>
+              <div class="step-content">
+                <p>Testes assíncronos com TestDispatcher e Turbine para asserções de StateFlow.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-header">
+                <span class="step-tag">Passo 3: Build de Release com Minificação ProGuard / R8</span>
+              </div>
+              <div class="step-content">
+                <p>Ofuscação de código e remoção de classes mortas reduzindo o APK de 48 MB para 14 MB.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-header">
+                <span class="step-tag">Passo 4: Assinatura Criptográfica do App Bundle</span>
+              </div>
+              <div class="step-content">
+                <p>Assinatura automatizada com chaves seguras armazenadas em GitHub Secrets.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-header">
+                <span class="step-tag">Passo 5: Conclusão de Entrega</span>
+              </div>
+              <div class="step-content">
+                <p>Deploy automatizado do aplicativo de monitoramento para a equipe de campo do Desafio Sanofi.</p>
+              </div>
+            </div>
+        </div>
+
+        <div class="plot-box">
+          <div class="box-header">
+            <span>📊 GRÁFICO COMPUTACIONAL &amp; VISUALIZAÇÃO DE RESULTADOS</span>
+            <span class="plot-tag">Matplotlib • Alta Resolução</span>
+          </div>
+          <div class="plot-img-container">
+            <img src="03_Provas_Avaliativas_Checkpoints/Checkpoint_6_cp6/grafico_resolucao.png" alt="Gráfico Integração Contínua (CI/CD) Mobile e Testes Automatizados E2E" loading="lazy" />
+          </div>
+        </div>
+      </section>
+  </main>
+
+  <footer>
+    <p>Bacharelado em Engenharia da Computação • <strong>FIAP</strong></p>
+    <p>Autor: Guilherme Macário (<a href="https://github.com/Guimemee" target="_blank">@Guimemee</a>) • Turma 3ECR • Ano 2024</p>
+    <p>Repositório Oficial: <a href="https://github.com/Guimemee/fiap-advanced-programming-and-mobile-dev" target="_blank">github.com/Guimemee/fiap-advanced-programming-and-mobile-dev</a></p>
+  </footer>
+
+  <script>
+    function copyText(elemId) {
+      const text = document.getElementById(elemId).innerText;
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(() => alert('Enunciado copiado para a área de transferência!'));
+      } else {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        alert('Enunciado copiado!');
+      }
+    }
+  </script>
+</body>
+</html>

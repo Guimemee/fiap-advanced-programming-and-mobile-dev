@@ -1,0 +1,7 @@
+FIAP • Engenharia da Computação
+Disciplina: Advanced Programming & Mobile Development
+Turma 3ECR • Ano 2024
+Checkpoint 03: Comunicação em Rede Assíncrona com Retrofit, OkHttp e Coroutines
+
+ENUNCIADO ORIGINAL:
+Implementar cliente HTTP com Retrofit e interceptores OkHttp para autenticação via tokens JWT, refresh token automático e tratamento de exceções de conexão.

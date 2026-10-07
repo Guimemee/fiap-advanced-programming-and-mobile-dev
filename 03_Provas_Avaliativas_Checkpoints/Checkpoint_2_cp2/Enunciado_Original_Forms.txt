@@ -1,0 +1,7 @@
+FIAP • Engenharia da Computação
+Disciplina: Advanced Programming & Mobile Development
+Turma 3ECR • Ano 2024
+Checkpoint 02: Clean Architecture: Camadas Domain, Data e Presentation
+
+ENUNCIADO ORIGINAL:
+Estruturar o projeto mobile em módulos desacoplados seguindo a Clean Architecture de Robert Martin, aplicando o padrão Repository e injeção de dependência com Hilt.
